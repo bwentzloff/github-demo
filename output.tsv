@@ -1,6 +1,6 @@
-seq_id	gc_percent
-seq1	60.0
-seq2	40.0
-seq3	100.0
-seq4	20.0
-seq5	0.0
+seq_id	cg_motif_count
+seq1	2
+seq2	0
+seq3	4
+seq4	0
+seq5	0

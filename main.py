@@ -2,8 +2,10 @@
 
 from pathlib import Path
 
-def count_motif(seq, motif):
-    return seq.upper().count(motif.upper())
+def gc_content(seq):
+    seq = seq.upper()
+    gc = seq.count("G") + seq.count("C")
+    return round((gc / len(seq)) * 100, 2)
 
 def read_fasta(path):
     with open(path) as f:
@@ -25,19 +27,17 @@ def main():
     fasta_path = Path("sequences.fasta")
     output_path = Path("output.tsv")
 
-    motif = "CG"
-
     rows = []
     for name, seq in read_fasta(fasta_path):
-        n_motif = count_motif(seq, motif)
-        rows.append((name, n_motif))
+        gc = gc_content(seq)
+        rows.append((name, gc))
 
     with open(output_path, "w") as out:
-        out.write("seq_id\tcg_motif_count\n")
-        for name, n_motif in rows:
-            out.write(f"{name}\t{n_motif}\n")
+        out.write("seq_id\tgc_percent\n")
+        for name, gc in rows:
+            out.write(f"{name}\t{gc}\n")
 
-    print(f"Wrote updated results to {output_path}")
+    print(f"Wrote GC results to {output_path}")
 
 if __name__ == "__main__":
     main()

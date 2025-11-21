@@ -25,7 +25,7 @@ def main():
     fasta_path = Path("sequences.fasta")
     output_path = Path("output.tsv")
 
-    motif = "CG"
+    motif = "AT"
 
     rows = []
     for name, seq in read_fasta(fasta_path):
